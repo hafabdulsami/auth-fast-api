@@ -6,7 +6,7 @@ class UserCreate(BaseModel):
     name:str
     
 class UserResponse(BaseModel):
-    id:int
+    id:str
     email:EmailStr
     name:str
 
