@@ -8,3 +8,4 @@ class LoginRequest(BaseModel):
 class LoginResponse(BaseModel):
     email:EmailStr
     name:str
+    access_token:str

@@ -3,6 +3,7 @@ from model.user import UserCreate, UserInDB
 from schema import user
 from utils.hashing import hash_password, verify_password
 from model.auth import LoginRequest
+from core.security import create_access_token
 class AuthService:
     def __init__(self):
         self.db = db
@@ -23,7 +24,9 @@ class AuthService:
     def login(self,login_credientials:LoginRequest):
         user = self.db.users.find_one({"email": login_credientials.email})
         if user and verify_password(login_credientials.password, user["hashedPassword"]):
+            access_token = create_access_token(data={"sub": user["email"]})
             return {
                 "email": user["email"],
-                "name": user["name"]
+                "name": user["name"],
+                "access_token": access_token
             }

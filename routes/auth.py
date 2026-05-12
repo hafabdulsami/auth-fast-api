@@ -12,5 +12,4 @@ def register(user:UserCreate,auth_service:AuthService=Depends()):
 @router.post('/login',response_model=LoginResponse)
 def login(request:LoginRequest,auth_service:AuthService=Depends()):
     user = auth_service.login(request)
-    print(request)
     return user
